@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import Hero from '../components/Hero.astro';
+import ApartmentTypes from '../components/ApartmentTypes.astro';
+import Testimonios from '../components/Testimonios'; 
+
+import FAQ from '../components/FAQ.astro';
+
+import SliderAreasComunes from '../components/SliderAreasComunes';
+---
+
+<Layout title="Hogares del Norte | Exclusividad y Seguridad">
+ 
+  <Hero />
+  <ApartmentTypes />
+  <SliderAreasComunes client:load />
+  <Testimonios client:load/>
+  <FAQ />
+  
+</Layout>

@@ -1,0 +1,443 @@
+---
+
+import { projects } from '../Data/ProjectsData';
+
+interface Props { idProject: string }
+const { idProject } = Astro.props;
+const projectId = parseInt(idProject) - 1;
+const portada = projects[projectId].render.portada;
+const mobilPortada = projects[projectId].render.mobilPortada;
+---
+<div id="genesisAnimation">
+    <div class="genesis-container">
+      <section class="hero " style={`--background-desktop: url(${portada}); --background-mobile: url(${mobilPortada})`} >
+       <img id="logoHogares" src="/LogoHogares.webp"  alt="">
+        <p id="PReferencial" class="">
+            "Las imágenes y renders son referenciales y pueden presentar variaciones en acabados, mobiliario y distribución. Su uso es únicamente ilustrativo y no representa una obligación contractual."
+        </p>
+      </section>
+      <section class="grid md:grid-cols-1 xl:grid lg:grid-cols-3">
+        <img src={projects[projectId].render.img3} alt="">
+        <img src={projects[projectId].render.img4} alt="">
+        <img src={projects[projectId].render.img5} alt="" class="md:hidden lg:flex">
+      
+      </section>
+      
+      <section class="sticky">
+        <div class="intro">
+          <div class="intro-col">
+            <p>Diseño moderno</p>
+            <p>Espacios amplios</p>
+          </div>
+          <div class="intro-col">
+            <p>Comodidad y estética</p>
+          </div>
+        </div>
+        <div class="img-1">
+            <img src={projects[projectId].render.img6} alt="" class="hidden md:flex">
+            <img src={projects[projectId].render.mobilImg6 } alt="" class="flex md:hidden">
+        </div>
+        <div class="img-2">
+            <img src={projects[projectId].render.img7} alt="" class="hidden md:flex">
+            <img src={projects[projectId].render.mobilImg7} alt="" class="flex md:hidden">
+        </div>
+        <div class="img-3">
+            <img src={projects[projectId].render.img8} alt="" class="hidden md:flex">
+            <img src={projects[projectId].render.mobilImg8} alt="" class="flex md:hidden">
+        </div>
+        <div class="copy">
+          <h1>{projects[projectId].text}</h1>
+        </div>
+      </section>
+      <section class="footer">
+        <h1>Infinite Realms Beckon Beyond</h1>
+      </section>
+    </div>
+  </div>
+  
+  <script>
+  // @ts-nocheck
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+  
+
+  const LenisModule = await import("https://unpkg.com/lenis@1.1.13/dist/lenis.min.js");
+  const Lenis = LenisModule.default || window.Lenis;
+  
+  const genesisContainer = document.querySelector("#genesisAnimation .genesis-container");
+
+  const stickyDuration = 400 * (window.innerHeight / 100); 
+  
+
+  const lenis = new Lenis();
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
+  
+
+  const introParagraphs = document.querySelectorAll(".intro-col p");
+  introParagraphs.forEach((paragraph) => {
+    const text = paragraph.textContent;
+    paragraph.innerHTML = text
+      .split(/(\s+)/)
+      .map((part) => {
+        if (part.trim() === "") return part;
+        return part.split("").map(char =>
+          `<span style="opacity:0; display: inline-block;">${char}</span>`
+        ).join("");
+      }).join("");
+  });
+  
+ 
+  function flickerAnimation(targets, toOpacity) {
+    gsap.to(targets, {
+      opacity: toOpacity,
+      duration: 0.05,
+      stagger: { amount: 0.3, from: "random" }
+    });
+  }
+  
+
+  ScrollTrigger.create({
+    trigger: ".sticky",
+    start: "top top",
+    end: `+=${window.innerHeight}`,
+    onEnter: () => flickerAnimation(".intro-col p span", 1),
+    onLeave: () => flickerAnimation(".intro-col p span", 0),
+    onEnterBack: () => flickerAnimation(".intro-col p span", 1),
+    onLeaveBack: () => flickerAnimation(".intro-col p span", 0),
+  });
+  
+ 
+  ScrollTrigger.create({
+    trigger: ".sticky",
+    start: "top top",
+    end: `+=${stickyDuration}`,
+    pin: true,
+    pinSpacing: false
+  });
+  
+  // Animaciones dentro de la sección sticky
+  gsap.to(".img-1 img", {
+    scale: 1.125,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".sticky",
+      start: "top top",
+      end: () => `+=${window.innerHeight}`,
+      scrub: true
+    }
+  });
+  
+  gsap.to(".img-2", {
+  clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".sticky",
+    start: "top top",
+   
+    end: () => `+=${window.innerHeight}`,
+    scrub: true,
+    onUpdate: (self) => {
+      const progress = self.progress;
+      gsap.set(".img-2", {
+        clipPath: `polygon(
+          ${gsap.utils.interpolate(40, 0, progress)}% ${gsap.utils.interpolate(25, 0, progress)}%,
+          ${gsap.utils.interpolate(60, 100, progress)}% ${gsap.utils.interpolate(25, 0, progress)}%,
+          ${gsap.utils.interpolate(60, 100, progress)}% ${gsap.utils.interpolate(75, 100, progress)}%,
+          ${gsap.utils.interpolate(40, 0, progress)}% ${gsap.utils.interpolate(75, 100, progress)}%
+        )`
+      });
+    }
+  }
+});
+
+  
+  gsap.to(".img-2 img", {
+    scale: 1.125,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".sticky",
+      start: "top top",
+      end: () => `+=${window.innerHeight}`,
+    
+      scrub: true
+    }
+  });
+  
+  gsap.to(".img-3", {
+    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".sticky",
+        start: () => `${window.innerHeight * 7}`,
+        end: () => `${window.innerHeight * 8}`,
+   
+      scrub: true,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        gsap.set(".img-3", {
+          clipPath: `polygon(
+            ${gsap.utils.interpolate(50, 0, progress)}% ${gsap.utils.interpolate(50, 0, progress)}%,
+            ${gsap.utils.interpolate(50, 100, progress)}% ${gsap.utils.interpolate(50, 0, progress)}%,
+            ${gsap.utils.interpolate(50, 100, progress)}% ${gsap.utils.interpolate(50, 100, progress)}%,
+            ${gsap.utils.interpolate(50, 0, progress)}% ${gsap.utils.interpolate(50, 100, progress)}%
+          )`
+        });
+      }
+    }
+  });
+  
+  gsap.fromTo(".img-2 img", { scale: 1.125 }, {
+    scale: 1.25,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".sticky",
+      start: () => `${window.innerHeight * 6}`,
+      end: () => `+=${window.innerHeight * 7}`,
+   
+      scrub: true
+    }
+  });
+  
+  gsap.to(".img-3 img", {
+    scale: 2.9,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".sticky",
+      start: () => `${window.innerHeight * 7}`,
+      end: () => `+=${window.innerHeight * 8}`,
+   
+      scrub: true,
+    }
+  });
+  
+  gsap.fromTo(".img-3 img", { scale: 2.9 }, {
+    scale: 1,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".sticky",
+      start: () => `${window.innerHeight * 8}`,
+      end: () => `${window.innerHeight * 9}`,
+    
+      scrub: true
+    }
+  });
+  
+  let tl2 = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".sticky",
+      start: () => `${window.innerHeight * 8}`,
+      end: () => `${window.innerHeight * 9}`,
+   
+      scrub: true,
+      toggleActions: "play reverse play reverse",
+    },
+  });
+  
+  tl2.to(".copy", {
+    display: "block",
+    rotateY: 0,
+    scale: 1,
+    duration: 1,
+  });
+  </script>
+  
+  <style >
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    width: 100%;
+  }
+  
+  #logoHogares{
+    width: 200px;
+    height: 50px;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #PReferencial{
+    font-size: 8px;
+  }
+
+  @media (min-width: 1024px) {
+  #PReferencial {
+    font-size: 14px;
+  }
+}
+
+  h1 {
+    text-transform: uppercase;
+    font-size: 100px;
+    font-weight: 600;
+    line-height: 90%;
+    letter-spacing: 2px;
+    color: white;
+    font-family: "Roboto Mono", monospace;
+  }
+  
+  p {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+  }
+  
+  section {
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .hero {
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-image: var(--background-desktop);
+    background-size: cover;
+  }
+  
+
+  @media (max-width: 768px) {
+  .hero {
+    background-image: var(--background-mobile);
+  }
+}
+
+
+  .hero p {
+    width: 50%;
+    text-align: center;
+  }
+  
+  
+  
+  .footer {
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #1d2944;
+  }
+  
+  .sticky {
+    position: relative;
+    perspective: 1000px;
+  }
+  
+  .intro {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    z-index: 2;
+  }
+  
+  .intro-col {
+    flex: 1;
+    display: flex;
+  }
+  
+  .intro-col p {
+    flex: 1;
+  }
+  
+  .intro-col p span {
+    display: inline-block;
+  }
+  
+  .intro-col:nth-child(2) p {
+    text-align: right;
+  }
+  
+  .img-1, .img-2, .img-3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .img-2 {
+    clip-path: polygon(40% 25%, 60% 25%, 60% 75%, 40% 75%);
+  }
+  
+  .img-3 {
+    clip-path: polygon(50% 25%, 50% 25%, 50% 75%, 50% 75%);
+  }
+  
+  .img-3 img {
+    transform-origin: top right;
+    transform: scale(3);
+  }
+  
+  .copy {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateY(-75deg) scale(0.5);
+    transform-origin: bottom left;
+    display: none;
+  }
+  
+  .copy h1 {
+    font-size: 5vw;
+    text-align: center;
+  }
+  
+  @media (max-width: 900px) {
+    h1 {
+      font-size: 20vw;
+    }
+    .hero p {
+      width: 100%;
+    }
+    .about {
+      padding: 4em 2em;
+      flex-direction: column;
+      gap: 4em;
+    }
+    .about-copy {
+      flex: 0.5;
+    }
+    .about-img {
+      margin-top: 4em;
+      height: 100%;
+    }
+    .intro, .intro-col {
+      flex-direction: column;
+    }
+    .intro-col p {
+      text-align: center !important;
+    }
+    .copy {
+      width: 90%;
+    }
+    .copy h1 {
+      font-size: 10vw;
+    }
+  }
+  
+  /* La altura fija para el contenedor GenesisAnimation */
+  .genesis-container {
+    height: 625vh;
+  }
+  </style>
+  

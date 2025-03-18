@@ -1,0 +1,138 @@
+---
+---
+
+<section class=" py-8 xl:py-16 xl:px-[80px] px-6  container mx-auto">
+  <div class=" px-4">
+    <div class="grid md:grid-cols-2 gap-12">
+      <div>
+        <h2 class="text-3xl font-bold text-colorPrimary mb-8 ">Preguntas Frecuentes</h2>
+        
+        <div class="space-y-4 ">
+          <!-- FAQ Item 1 -->
+          <div class="border-b border-gray-200 pb-4">
+            <button id="faqButton-1" class="flex justify-between items-center w-full text-left">
+              <h3 class="font-medium text-lg">¿Qué servicios y comercios tengo cerca?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+            <div id="faq-1" class="mt-2 text-gray-600">
+              <p>A pocos pasos, encontrarás supermercados, farmacias, restaurantes, bancos y centros comerciales, además de acceso rápido a las principales vías de la ciudad.</p>
+            </div>
+          </div>
+          
+          <!-- FAQ Item 2 -->
+          <div class="border-b border-gray-200 pb-4">
+            <button id="faqButton-2" class="flex justify-between items-center w-full text-left">
+              <h3 class="font-medium text-lg">¿Cuáles son las opciones de financiamiento?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+              <div id="faq-2" class="mt-2 text-gray-600 hidden">
+                <p>A pocos pasos, encontrarás supermercados, farmacias, restaurantes, bancos y centros comerciales, además de acceso rápido a las principales vías de la ciudad.</p>
+              </div>
+            
+          </div>
+          
+          <!-- FAQ Item 3 -->
+          <div class="border-b border-gray-200 pb-4">
+            <button id="faqButton-3" class="flex justify-between items-center w-full text-left">
+              <h3 class="font-medium text-lg">¿Se puede reservar un departamento antes de la compra?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+            <div id="faq-3" class="mt-2 text-gray-600 hidden">
+              <p>A pocos pasos, encontrarás supermercados, farmacias, restaurantes, bancos y centros comerciales, además de acceso rápido a las principales vías de la ciudad.</p>
+            </div>
+          </div>
+          
+          <!-- FAQ Item 4 -->
+          <div class="border-b border-gray-200 pb-4">
+            <button id="faqButton-4" class="flex justify-between items-center w-full text-left">
+              <h3 class="font-medium text-lg">¿Cuándo estarán listos los departamentos para entrega?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+            <div id="faq-4" class="mt-2 text-gray-600 hidden">
+              <p>A pocos pasos, encontrarás supermercados, farmacias, restaurantes, bancos y centros comerciales, además de acceso rápido a las principales vías de la ciudad.</p>
+            </div>
+          </div>
+          
+          <!-- FAQ Item 5 -->
+          <div class="border-b border-gray-200 pb-4">
+            <button id="faqButton-5" class="flex justify-between items-center w-full text-left">
+              <h3 class="font-medium text-lg">¿Puedo personalizar mi departamento antes de la entrega?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+            <div id="faq-5" class="mt-2 text-gray-600 hidden">
+              <p>A pocos pasos, encontrarás supermercados, farmacias, restaurantes, bancos y centros comerciales, además de acceso rápido a las principales vías de la ciudad.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="md:w-full md:h-full">
+       
+        <img class="w-full md:h-full xl:h-[75%] md:object-cover" src="/src/assets/faq.webp" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+
+  const faq1 = document.getElementById("faq-1");
+  const faq2 = document.getElementById("faq-2");
+  const faq3 = document.getElementById("faq-3");
+  const faq4 = document.getElementById("faq-4");
+  const faq5 = document.getElementById("faq-5");
+
+  const faqButton1 = document.getElementById("faqButton-1");
+  const faqButton2 = document.getElementById("faqButton-2");
+  const faqButton3 = document.getElementById("faqButton-3");
+  const faqButton4 = document.getElementById("faqButton-4");
+  const faqButton5 = document.getElementById("faqButton-5");
+
+if(faq1 && faqButton1 && faq2 && faqButton2 && faq3 && faqButton3 && faq4 && faqButton4 && faq5 && faqButton5){
+  faqButton2.addEventListener("click", () => {
+    faq1.classList.add("hidden");
+    faq2.classList.remove("hidden");
+    faq3.classList.add("hidden");
+    faq4.classList.add("hidden");
+    faq5.classList.add("hidden");
+  });
+  faqButton1.addEventListener("click", () => {
+    faq1.classList.remove("hidden");
+    faq2.classList.add("hidden");
+    faq3.classList.add("hidden");
+    faq4.classList.add("hidden");
+    faq5.classList.add("hidden");
+  });
+  faqButton3.addEventListener("click", () => {
+    faq1.classList.add("hidden");
+    faq2.classList.add("hidden");
+    faq3.classList.remove("hidden");
+    faq4.classList.add("hidden");
+  });
+  faqButton4.addEventListener("click", () => {
+    faq1.classList.add("hidden");
+    faq2.classList.add("hidden");
+    faq3.classList.add("hidden");
+    faq4.classList.remove("hidden");
+    faq5.classList.add("hidden");
+  });
+  faqButton5.addEventListener("click", () => {
+    faq1.classList.add("hidden");
+    faq2.classList.add("hidden");
+    faq3.classList.add("hidden");
+    faq4.classList.add("hidden");
+    faq5.classList.remove("hidden");
+  })};
+
+
+</script>

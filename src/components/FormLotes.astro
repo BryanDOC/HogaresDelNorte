@@ -1,0 +1,43 @@
+<div id="form-lotes" class="bg-colorPrimary w-[450px] h-fit rounded-xl px-8 py-12 fixed top-[250px] right-12 hidden xl:flex xl:flex-col">
+    <h2 class="text-2xl font-bold text-center text-white">¡Cotiza aqui tu futuro Hogar!</h2>
+    <div class="mt-12 flex flex-col gap-6">
+        <p class="font-bold border-b-2 border-white text-white pb-6">Nombres</p>
+        <p class="font-bold border-b-2 border-white text-white pb-6">Apellidos</p>
+        <p class="font-bold border-b-2 border-white text-white pb-6">Email</p>
+        <p class="font-bold border-b-2 border-white text-white pb-6">Telefono/Celular</p>
+        <p class="font-bold border-b-2 border-white text-white pb-6">Mensajes</p>
+        <button class="bg-white text-colorPrimary font-bold py-3 rounded-xl uppercase">Cotizar ahora</button>
+    </div>
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("#form-lotes") as HTMLElement | null;
+    const stopElement = document.querySelector("#stop-scroll") as HTMLElement | null;
+
+    if (!form || !stopElement) {
+        console.warn("Uno de los elementos no fue encontrado en el DOM");
+        return;
+    }
+
+    let initialTop = 250;
+    let targetTop = 170;
+    
+    window.addEventListener("scroll", () => {
+        let scrollY = window.scrollY;
+        let stopPosition = stopElement.offsetTop - form.offsetHeight - 20 ; 
+
+        if (scrollY < stopPosition) {
+            let newTop = Math.max(targetTop, initialTop - (scrollY / 5)); 
+            form.style.top = `${newTop}px`;
+            form.style.position = "fixed";
+        } else {
+            form.style.position = "absolute";
+            form.style.top = `${stopPosition}px`; 
+        }
+    });
+});
+
+
+</script>

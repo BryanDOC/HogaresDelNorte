@@ -1,0 +1,60 @@
+---
+interface Props {
+    classKevin : string;
+    card : Card;
+    
+}
+
+interface Card {
+    id: number;
+    name: string;
+    rooms: number;
+    bathrooms: number;
+    area: string;
+    render: {
+        portada: string;
+        fachada: string;
+        img3: string;
+        img4: string;
+        img5: string;
+        img6: string;
+        img7: string;
+        img8: string;
+    };
+}
+const {card, classKevin} = Astro.props
+import Cama from './Icons/Cama.astro'
+import Baño from './Icons/Baño.astro'
+import Area from './Icons/Area.astro'
+---
+
+
+<div 
+  class={`relative ${classKevin} bg-cover bg-center h-[531px] md:h-[400px] lg:h-[531px] rounded-xl shadow-lg`} 
+  style={{ backgroundImage: `url(${card.render.portada})` }}
+>
+ 
+  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-xl"></div>
+
+ 
+  <div class="relative z-10 mx-auto w-fit h-full flex flex-col justify-end items-center pb-8 gap-3">
+    <h2 class="text-sm xl:text-2xl text-white">{card.name}</h2>
+    <div class="flex gap-4">
+      <div class="flex items-center gap-4">
+        <Cama />
+        <p class="text-white text-xs xl:text-base">{card.rooms}</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <Baño />
+        <p class="text-white text-xs xl:text-base">{card.bathrooms}</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <Area />
+        <p class="text-white text-xs xl:text-base">{card.area}</p>
+      </div>
+    </div>
+    <a href={`/proyecto/${card.id}`} class="bg-white text-center text-colorPrimary font-bold py-2 rounded-full w-full text-xs xl:text-base mt-2">
+      Ver proyecto
+    </a>
+  </div>
+</div>

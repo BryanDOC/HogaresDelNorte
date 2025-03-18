@@ -1,0 +1,111 @@
+---
+    import {projects} from '../Data/ProjectsData'
+    interface Props {
+        idProject: string 
+    }
+    
+    const {idProject} = Astro.props
+    const projectId = parseInt(idProject) - 1
+    const name = projects[projectId].name
+    const letters = name.toUpperCase().split("")
+    const half = Math.ceil(letters.length/2)
+    const firsHalf = letters.slice(0,half)
+    const secondHalf = letters.slice(half)
+---
+
+<div id="body" class="relative">
+    
+    <div id="header" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex w-full">
+      <div id="letters" class="flex flex-1 uppercase">
+        {
+            firsHalf.map(letter =>(
+            <div class="flex-1 text-[6vh] lg:text-[18vh] font-normal text-black text-center">{letter}</div>
+            ))
+        }
+        
+      </div>
+      <div id="letters" class="flex flex-1 uppercase">
+        {
+            secondHalf.map(letter =>(
+            <div class="flex-1 text-[6vh] lg:text-[18vh] font-normal text-black text-center">{letter}</div>
+            ))
+        }
+       
+       
+      </div>
+    </div>
+  
+ 
+    <div id="website-content" class="relative top-0 w-full min-h-screen bg-white overflow-hidden">
+      <div id="img-holder" 
+           class="relative w-full h-screen bg-white transform rotate-[30deg]" 
+           style="clip-path: polygon(37.5% 20%, 62.5% 20%, 62.5% 80%, 37.5% 80%);">
+        <img src={projects[projectId].render.fachada} alt="hero" class="w-full h-full object-cover" />
+      </div>
+    </div>
+  </div>
+  
+  <script >
+    import gsap from "gsap";
+    import ScrollTrigger from "gsap/ScrollTrigger";
+  
+    gsap.registerPlugin(ScrollTrigger);
+  
+   
+    gsap.set("#img-holder", {
+      clipPath: "polygon(37.5% 20%, 62.5% 20%, 62.5% 80%, 37.5% 80%)",
+      rotation: 30
+    });
+    gsap.set("#img-holder img", { scale: 2 });
+  
+ 
+    window.addEventListener("DOMContentLoaded", () => {
+      const imgHolderHeight = window.innerHeight;
+      const extraScrollHeight = window.innerHeight * 3; 
+      const totalBodyHeight = imgHolderHeight + extraScrollHeight;
+      document.body.style.height = `${totalBodyHeight}px`;
+    });
+  
+ 
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#website-content",
+        start: "top top",
+        end: "+=300%",
+        scrub: 1,
+        pin: true,
+      }
+    });
+  
+    tl.to("#header #letters:first-child", {
+      x: () => -innerWidth * 3,
+      scale: 10,
+      ease: "power2.inOut"
+    }, 0)
+    .to("#header #letters:last-child", {
+      x: () => innerWidth * 3,
+      scale: 10,
+      ease: "power2.inOut"
+    }, 0)
+    .to("#img-holder", {
+      rotation: 0,
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      ease: "power2.inOut"
+    }, 0)
+    .to("#img-holder img", {
+      scale: 1,
+      ease: "power2.inOut"
+    }, 0);
+  </script>
+  
+  <style>
+    
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+    }
+  </style>

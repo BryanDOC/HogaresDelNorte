@@ -1,0 +1,115 @@
+---
+import Satisfation from "./Icons/Satisfation.astro";
+import House from './Icons/House.astro';
+import Price from './Icons/Price.astro'
+---
+
+<section class="py-[100px] xl:px-[80px] px-6 md:px-12 container mx-auto">
+  <div class=" px-4 text-center ">
+    <p class="text-gray-700 text-lg mb-16">
+      Somos una empresa con más de 50 años de experiencia en el negocio inmobiliario. Actualmente contamos 
+      con los negocios Habilitación Urbana y Vivienda Social, Departamentos y Hoteles. Siempre comprometidos a 
+      seguir mejorando la vida de los peruanos.
+    </p>
+    
+    <h2 class="text-3xl font-bold text-primary2 mb-12">¿QUE HACEMOS?</h2>
+    
+    <h3 class="text-2xl font-bold text-colorPrimary mb-12">Construimos el hogar que tu familia necesita</h3>
+    
+    <p class="text-gray-700 mb-16 max-w-2xl mx-auto">
+      Nuestro principal objetivo es brindarles a nuestros clientes una vivienda de calidad, de 
+      excelente distribución, ubicada en una urbanización donde se fomenta la sana convivencia.
+    </p>
+    
+    <div class="grid md:grid-cols-3 gap-12 my-[100px] ">
+      
+      <div class="flex flex-col items-center justify-center ">
+        <div class=" mb-6 text-primary2">
+          <Satisfation  />
+        </div>
+        <h4 class="text-primary2 font-medium mb-4">Experiencia y confianza comprobada</h4>
+        <p class="text-gray-600 text-sm">
+          Nuestros años en el mercado y el liderazgo comprobado, nos permiten conocer y brindar las mejores alternativas a nuestros clientes.
+        </p>
+      </div>
+     
+      <div class="flex flex-col items-center justify-center">
+        <div class=" mb-6 text-primary2">
+         <House />
+        </div>
+        <h4 class="text-primary2 font-medium mb-4">Excelente diseño de urbanizaciones</h4>
+        <p class="text-gray-600 text-sm">
+          Diseñamos casas y departamentos que se adapten a las necesidades de nuestros clientes, con diferentes opciones y tamaños.
+        </p>
+      </div>
+      
+      <!-- Feature 3 -->
+      <div class="flex flex-col items-center justify-center ">
+        <div class=" mb-6 text-primary2">
+          <Price />
+        </div>
+        <h4 class="text-primary2 font-medium mb-4">Precios asequibles para tu bolsillo</h4>
+        <p class="text-gray-600 text-sm">
+          Nuestras viviendas cuentan con apoyo económico a través de bonos del Fondo Mivivienda.
+        </p>
+      </div>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-12 items-center my-[100px]">
+      <div>
+       
+        <img src="/src/assets/Vision.webp" class="w-full aspect-square rounded-xl"></img>
+      </div>
+      
+      <div class="text-left  h-[250px]">
+        <div class="border-b border-gray-250 mb-6">
+          <button id="btnMision" class="py-3 text-primary2 font-medium border-b-2 border-primary2 mr-6">Misión</button>
+          <button id="btnVision" class="py-3 text-gray-400 font-medium">Visión</button>
+        </div>
+        <div id="mision">
+           <h4 class="text-xl font-bold text-colorPrimary mb-4">¿Por qué estamos aquí?</h4>
+        
+        <p class="text-gray-700">
+          Desarrollamos nuestros negocios basados en un modelo de gestión empresarial comprometidos con el desarrollo sostenible y las relaciones de confianza con nuestros grupos de interés.
+        </p>
+        </div>
+        <div id="vision" class="hidden ">
+          <h4 class="text-xl font-bold text-colorPrimary mb-4">¿Hacia dónde vamos?</h4>
+       
+       <p class="text-gray-700">
+        Ser una empresa líder reconocida por su compromiso con el desarrollo sostenible, la innovación y la construcción de relaciones de confianza con nuestros clientes y socios estratégicos.
+       </p>
+       </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+
+  const btnMision = document.getElementById("btnMision");
+  const btnVision = document.getElementById("btnVision");
+  const mision = document.getElementById("mision");
+  const vision = document.getElementById("vision");
+
+  if(btnMision && btnVision && mision && vision) {
+     btnMision.addEventListener("click", () => {
+     mision.classList.remove("hidden");
+     btnMision.classList.add("border-b-2", "border-primary2", "text-primary2");
+     btnVision.classList.remove("border-b-2", "border-primary2", "text-primary2");
+     vision.classList.add("hidden");
+  });
+
+    btnVision.addEventListener("click", () => {
+    btnVision.classList.add("border-b-2", "border-primary2", "text-primary2");
+    btnMision.classList.remove("border-b-2", "border-primary2", "text-primary2");
+    btnMision.classList.add("text-gray-400");
+    mision.classList.add("hidden");
+    vision.classList.remove("hidden");
+    
+  });
+
+  }
+ 
+
+</script>

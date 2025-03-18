@@ -1,0 +1,437 @@
+<div class=" h-[700vh] w-full ">
+    <section class="hero">
+      <h1>Genesis</h1>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla obcaecati deleniti distinctio similique dicta eum ab aperiam error expedita? Error dolorum ea totam accusantium tempora vel magnam optio sit iste.
+      </p>
+    </section>
+    <section class="about">
+      <div class="about-img">
+        <img src="/sala.webp" alt="">
+      </div>
+      <div class="about-copy">
+        <h1>The  fulcrum</h1>
+      </div>
+    </section>
+    <section class="sticky">
+      <div class="intro">
+        <div class="intro-col">
+          <p>Veiled depths of eternity</p>
+          <p>Currents of cosmic wisdom</p>
+        </div>
+        <div class="intro-col">
+          <p>Nexus of all existence</p>
+        </div>
+      </div>
+      <div class="img-1">
+        <img src="/bano.webp" alt="">
+      </div>
+      <div class="img-2">
+        <img src="/cochera.webp" alt="">
+      </div>
+      <div class="img-3">
+        <img src="/dormitorio1.webp" alt="">
+      </div>
+      <div class="copy">
+        <h1>The cosmic keystone Aethoria unlocks the gates to multiversal transformation</h1>
+      </div>
+    </section>
+    <section class="footer">
+      <h1>Infinite Realms Beckon Beyond</h1>
+    </section>
+  </div>
+
+  <script >
+    // @ts-nocheck
+    import gsap from "gsap";
+    import ScrollTrigger from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+  
+    // Importar Lenis dinámicamente desde el CDN
+    const LenisModule = await import("https://unpkg.com/lenis@1.1.13/dist/lenis.min.js");
+    const Lenis = LenisModule.default || window.Lenis;
+  
+    const stickySection = document.querySelector(".sticky");
+    const totalStickyHeight = window.innerHeight * 4;
+  
+    // Inicializar Lenis para suavizar el scroll
+    const lenis = new Lenis();
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+  
+    // Dividir cada palabra de los párrafos intro en spans (letras)
+    const introParagraphs = document.querySelectorAll(".intro-col p");
+    introParagraphs.forEach((paragraph) => {
+      const text = paragraph.textContent;
+      paragraph.innerHTML = text
+        .split(/(\s+)/)
+        .map((part) => {
+          if (part.trim() === "") {
+            return part;
+          } else {
+            return part
+              .split("")
+              .map((char) => `<span style="opacity:0; display: inline-block;">${char}</span>`)
+              .join("");
+          }
+        })
+        .join("");
+    });
+  
+    // Función para la animación flicker de los textos intro
+    function flickerAnimation(targets, toOpacity) {
+      gsap.to(targets, {
+        opacity: toOpacity,
+        duration: 0.05,
+        stagger: {
+          amount: 0.3,
+          from: "random",
+        }
+      });
+    }
+  
+    // ScrollTrigger para animar el flicker del texto intro
+    ScrollTrigger.create({
+      trigger: stickySection,
+      start: "top top",
+      end: () => `${window.innerHeight * 3}`,
+      onEnter: () => flickerAnimation(".intro-col p span", 1),
+      onLeave: () => flickerAnimation(".intro-col p span", 0),
+      onEnterBack: () => flickerAnimation(".intro-col p span", 1),
+      onLeaveBack: () => flickerAnimation(".intro-col p span", 0),
+    });
+  
+    // Pin del sticky section
+    ScrollTrigger.create({
+      trigger: stickySection,
+      start: "top top",
+      end: () => `+=${totalStickyHeight}`,
+      pin: true,
+      pinSpacing: false
+    });
+  
+    // Escala de la imagen 1
+    gsap.to(".img-1 img", {
+      scale: 1.125,
+      ease: "none",
+      scrollTrigger: {
+        trigger: stickySection,
+        start: "top top",
+        end: () => `+=${window.innerHeight}`,
+        scrub: true
+      }
+    });
+  
+    // Animar clip-path de la imagen 2
+    gsap.to(".img-2", {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      ease: "none",
+      scrollTrigger: {
+        trigger: stickySection,
+        start: "top top",
+        end: () => `+=${window.innerHeight}`,
+        scrub: true,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          gsap.set(".img-2", {
+            clipPath: `polygon(
+              ${gsap.utils.interpolate(40, 0, progress)}% ${gsap.utils.interpolate(25, 0, progress)}%,
+              ${gsap.utils.interpolate(60, 100, progress)}% ${gsap.utils.interpolate(25, 0, progress)}%,
+              ${gsap.utils.interpolate(60, 100, progress)}% ${gsap.utils.interpolate(75, 100, progress)}%,
+              ${gsap.utils.interpolate(40, 0, progress)}% ${gsap.utils.interpolate(75, 100, progress)}%
+            )`
+          });
+        }
+      }
+    });
+  
+    // Escala de la imagen 2
+    gsap.to(".img-2 img", {
+      scale: 1.125,
+      ease: "none",
+      scrollTrigger: {
+        trigger: stickySection,
+        start: "top top",
+        end: () => `+=${window.innerHeight}`,
+        scrub: true
+      }
+    });
+  
+    // Animar clip-path de la imagen 3
+    gsap.to(".img-3", {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      ease: "none",
+      scrollTrigger: {
+        trigger: stickySection,
+        start: () => `${window.innerHeight * 3}`,
+        end: () => `${window.innerHeight * 4}`,
+        scrub: true,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          gsap.set(".img-3", {
+            clipPath: `polygon(
+              ${gsap.utils.interpolate(50, 0, progress)}% ${gsap.utils.interpolate(50, 0, progress)}%,
+              ${gsap.utils.interpolate(50, 100, progress)}% ${gsap.utils.interpolate(50, 0, progress)}%,
+              ${gsap.utils.interpolate(50, 100, progress)}% ${gsap.utils.interpolate(50, 100, progress)}%,
+              ${gsap.utils.interpolate(50, 0, progress)}% ${gsap.utils.interpolate(50, 100, progress)}%
+            )`
+          });
+        },
+      }
+    });
+  
+    // Animación de escala de img-2 (de 1.125 a 1.25)
+    gsap.fromTo(".img-2 img", {
+      scale: 1.125,
+    },{
+      scale: 1.25,
+      ease: "none",
+      scrollTrigger: {
+        trigger: stickySection,
+        start: () => `${window.innerHeight * 3}`,
+        end: () => `+=${window.innerHeight * 4}`,
+        scrub: true
+      }
+    });
+  
+    // Escalar img-3 (acercar)
+    gsap.to(".img-3 img", {
+      scale: 2.9,
+      ease: "none",
+      scrollTrigger: {
+        trigger: stickySection,
+        start: () => `${window.innerHeight * 3}`,
+        end: () => `+=${window.innerHeight * 4}`,
+        scrub: true,
+      }
+    });
+  
+    // Resetear la escala de img-3 (zoom out)
+    gsap.fromTo(".img-3 img", {
+      scale: 2.9,
+    },{
+      scale: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: stickySection,
+        start: () => `${window.innerHeight * 4}`,
+        end: () => `${window.innerHeight * 6}`,
+        scrub: true
+      }
+    });
+  
+    // Timeline para mostrar y animar el elemento .copy
+    let tl2 = gsap.timeline({
+      scrollTrigger: {
+        trigger: stickySection,
+        start: () => `${window.innerHeight * 4.5}`,
+        end: () => `${window.innerHeight * 5.5}`,
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      },
+    });
+    tl2.to(".copy", {
+      display: "block",
+      rotateY: 0,
+      scale: 1,
+      duration: 1,
+    });
+  </script>
+  
+  <style >
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+  
+  /* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+   */
+  /* html, body {
+    width: 100%;
+    height: 700vh !important;
+  } */
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  h1 {
+    text-transform: uppercase;
+    font-size: 100px;
+    font-weight: 600;
+    line-height: 90%;
+    letter-spacing: 2px;
+    color: white;
+    font-family: "Roboto Mono", monospace;
+  }
+  
+  p {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+  }
+  
+  section {
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .hero {
+    padding: 4em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: url('/hero.jpg') no-repeat 50% 50%;
+    background-size: cover;
+  }
+  
+  .hero p {
+    width: 50%;
+    text-align: center;
+  }
+  
+  .about {
+    display: flex;
+    padding: 4em 12em;
+    justify-content: center;
+    align-items: center;
+    gap: 10em;
+    background-color: #667e74;
+  }
+  
+  .about-img, .about-copy {
+    flex: 1;
+  }
+  
+  .about-img {
+    height: 75%;
+    border: 2px solid black;
+  }
+  
+  .about-copy h1 {
+    text-align: center;
+    font-size: 10vw;
+    color: #263130;
+    font-family: "Oswald", sans-serif;
+  }
+  
+  .footer {
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #1d2944;
+  }
+  
+  .sticky {
+    position: relative;
+    perspective: 1000px;
+  }
+  
+  .intro {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    z-index: 2;
+  }
+  
+  .intro-col {
+    flex: 1;
+    display: flex;
+  }
+  
+  .intro-col p {
+    flex: 1;
+  }
+  
+  .intro-col p span {
+    display: inline-block;
+  }
+  
+  .intro-col:nth-child(2) p {
+    text-align: right;
+  }
+  
+  .img-1, .img-2, .img-3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .img-2 {
+    clip-path: polygon(40% 25%, 60% 25%, 60% 75%, 40% 75%);
+  }
+  
+  .img-3 {
+    clip-path: polygon(50% 25%, 50% 25%, 50% 75%, 50% 75%);
+  }
+  
+  .img-3 img {
+    transform-origin: top right;
+    transform: scale(3);
+  }
+  
+  .copy {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateY(-75deg) scale(0.5);
+    transform-origin: bottom left;
+    display: none;
+  }
+  
+  .copy h1 {
+    font-size: 5vw;
+    text-align: center;
+  }
+  
+  @media (max-width: 900px) {
+    h1 {
+      font-size: 20vw;
+    }
+    .hero p {
+      width: 100%;
+    }
+    .about {
+      padding: 4em 2em;
+      flex-direction: column;
+      gap: 4em;
+    }
+    .about-copy {
+      flex: 0.5;
+    }
+    .about-img {
+      margin-top: 4em;
+      height: 100%;
+    }
+    .intro, .intro-col {
+      flex-direction: column;
+    }
+    .intro-col p {
+      text-align: center !important;
+    }
+    .copy {
+      width: 90%;
+    }
+    .copy h1 {
+      font-size: 10vw;
+    }
+  }
+  </style>

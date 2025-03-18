@@ -1,0 +1,21 @@
+---
+import LotesHero from '../components/LotesHero.astro';
+import Layout from '../layouts/Layout.astro';
+import ContentLotes from '../components/ContentLotes.astro';
+import FormLotes from '../components/FormLotes.astro';
+import CarruselLotes from '../components/CarruselLotes'
+---
+
+<Layout title="Nosotros | Hogares del Norte">
+  <div class="relative">
+    <LotesHero />
+    <ContentLotes/>
+    <div id="stop-scroll" class="h-14 w-full hidden xl:flex ">
+
+    </div>
+    <CarruselLotes client:load/>
+    <FormLotes />
+  </div>
+ 
+  
+</Layout>

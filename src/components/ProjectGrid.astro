@@ -1,0 +1,33 @@
+---
+import CardProjects from './CardProjects.astro';
+import {projects} from '../Data/ProjectsData'
+
+---
+
+<section class="my-10 px-6 md:px-12 xl:px-[80px] container mx-auto">
+  <div class="grid md:grid-cols-3 gap-4 grid-cols-1">
+    {projects.map((card, index) => {
+      let classes = "";
+      switch (index % 4) {
+        case 0:
+          
+          classes = "md:col-span-2";
+          break;
+        case 1:
+         
+          classes = "md:col-span-1";
+          break;
+        case 2:
+        
+          classes = "md:col-start-1 md:col-span-1";
+          break;
+        case 3:
+        
+          classes = "md:col-start-2 md:col-span-2";
+          break;
+      }
+      return <CardProjects  card={card} classKevin={classes}  />;
+    })}
+  </div>
+  
+</section>

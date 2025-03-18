@@ -1,0 +1,12 @@
+---
+
+import HeaderProjects from './HeaderProjects.astro';
+import GenesisAnimation from './GenesisAnimation.astro';
+interface Props { idProject: string }
+const { idProject } = Astro.props;
+---
+
+<div class="combined-container relative">
+  <HeaderProjects idProject={idProject} />
+  <GenesisAnimation idProject={idProject} />
+</div>

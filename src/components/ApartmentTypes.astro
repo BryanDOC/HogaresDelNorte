@@ -1,0 +1,147 @@
+---
+import Bed from "./Icons/Bed.astro";
+import Money from "./Icons/Money.astro";
+---
+
+<section class="xl:my-[100px] my-[80px] xl:px-[80px] px-6  md:px-12 w-full container mx-auto" >
+  <div class=" ">
+    
+        <div class="grid md:grid-cols-2 grid-cols-1 gap-8 items-center ">
+      <div class=" h-full">
+        <h2 class="  text-2xl text-center xl:text-3xl font-bold text-colorPrimary font-Montserrat xl:max-w-[430px]">Vive en la cima del lujo y la tranquilidad</h2>
+        <div class="flex mb-6 my-8 justify-center xl:justify-start">
+          
+          <button id="btnTipoA" class="flex items-center space-x-4  rounded-full  py-2">
+            <span id="spanTipoA" class="w-5 h-5 rounded-full bg-primary2"></span>
+            <span class="font-medium">Tipo A</span>
+          </button>
+          <button id="btnTipoB" class="flex items-center space-x-4  rounded-full px-4 py-2">
+            <span id="spanTipoB" class="w-5 h-5 rounded-full border border-primary2"></span>
+            <span class="font-medium">Tipo B</span>
+          </button>
+        </div>
+        <div class="xl:max-w-[400px] flex flex-col gap-6 mb-6">
+          <p class="text-colorPrimary text-justify">
+          Más que un departamento, es un refugio exclusivo diseñado para quienes buscan una experiencia superior en la ciudad. Su arquitectura moderna y acabados de primer nivel crean un ambiente donde la elegancia se respira.
+        </p>
+        
+        <p class="text-colorPrimary text-justify">
+          Con más de 18 áreas comunes pensadas para el bienestar de toda la familia, aquí cada día es una experiencia única. Disfruta de la tranquilidad de vivir en un conjunto de privilegios exclusivos: centros comerciales y zonas recreativas te ofrecerán la conexión perfecta entre comodidad y entretenimiento, dando la bienvenida a un estilo de vida sin concesiones.
+        </p>
+        </div>
+        
+        
+        <a href="#contacto" class="inline-block bg-primary2 hover:bg-opacity-90 text-white font-medium py-2 xl:px-[90px] rounded-md xl:rounded-xl transition-colors mt-4 w-full text-center xl:w-fit">
+          Cotizar
+        </a>
+      </div>
+      
+      <div class=" flex flex-col gap-4 xl:gap-0 h-full justify-between md:justify-center  ">
+        <div class="xl:mb-4 ">
+              <img id="imagenTipoA" src="/src/assets/tipoA.webp" alt="" class="w-full">
+              <img id="imagenTipoB" src="/src/assets/tipoB.webp" alt="" class="w-full hidden">
+        </div>
+           
+          <div  class=" shadow-lg rounded-br-[30px]  ">
+            <div class="flex items-center ">
+              <div class="bg-colorPrimary py-2 px-6 rounded-tl-[30px] ">
+                <h3 class="font-bold text-xs xl:text-xl text-white">Sultana</h3>
+                <p class="text-[9px] xl:text-sm text-gray-300 ">Urb Jardin</p>
+              </div>
+              <!-- Tipo A -->
+              <div id="tipoA" class="flex items-center justify-between  w-full px-6">
+                <p class="xl:text-base text-xs font-bold text-colorPrimary">Tipo A</p>
+                <div class="flex flex-col items-center">
+                  <p class="text-[10px] xl:text-sm text-colorPrimary">Área Total</p>
+                  <p class="xl:text-base text-[10px] text-colorPrimary">80.50 m²</p>
+                </div>
+                <div>
+                    <div class="flex items-center space-x-2 xl:space-x-4">
+                   <Bed />
+                    <p class="text-colorPrimary text-xs xl:text-xl">3</p>
+                  </div>
+                  <div class="flex items-center space-x-2 xl:space-x-4">
+                    <Money/>
+                    <p class="text-colorPrimary text-xs xl:text-xl">1500</p>
+                  </div>
+                </div>
+                
+              </div>
+              <!-- Tipo B -->
+              <div id="tipoB" class="hidden items-center justify-between  w-full px-6">
+                <p class="xl:text-base text-xs font-bold text-colorPrimary">Tipo B</p>
+                <div class="flex flex-col items-center">
+                  <p class="text-[10px] xl:text-sm text-colorPrimary">Área Total</p>
+                  <p class=" xl:text-base text-[10px] text-colorPrimary">64.62 m²</p>
+                </div>
+                
+                <div>
+                  <div class="flex items-center space-x-2 xl:space-x-4">
+                 <Bed />
+                  <p class="text-colorPrimary text-xs xl:text-xl">2</p>
+                </div>
+                <div class="flex items-center space-x-2 xl:space-x-4">
+                  <Money/>
+                  <p class="text-colorPrimary text-xs xl:text-xl">1000</p>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          
+             
+              
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+ document.addEventListener("DOMContentLoaded", () => {
+    const tipoABtn = document.getElementById("btnTipoA");
+    const tipoBBtn = document.getElementById("btnTipoB");
+    const tipoAImg = document.getElementById("imagenTipoA");
+    const tipoBImg = document.getElementById("imagenTipoB");
+    const tipoA = document.getElementById("tipoA");
+    const tipoB = document.getElementById("tipoB");
+    const spanTipoA = document.getElementById("spanTipoA");
+    const spanTipoB = document.getElementById("spanTipoB");
+
+    if (tipoABtn && tipoBBtn && tipoA && tipoB && tipoAImg && tipoBImg && spanTipoA&& spanTipoB ) {	
+        tipoABtn.addEventListener("click", () => {
+            tipoA.classList.remove("hidden");
+            tipoA.classList.add("flex" );
+            tipoB.classList.remove("flex");
+            tipoB.classList.add("hidden");
+            tipoAImg.classList.remove("hidden");
+            tipoAImg.classList.add("flex");
+            tipoBImg.classList.remove("flex");
+            tipoBImg.classList.add("hidden");
+            spanTipoA.classList.remove("border", "border-primary2");
+            spanTipoA.classList.add("bg-primary2");
+            spanTipoB.classList.remove("bg-primary2");
+            spanTipoB.classList.add("border", "border-primary2");
+            
+        });
+
+        tipoBBtn.addEventListener("click", () => {
+            tipoB.classList.remove("hidden");
+            tipoB.classList.add("flex");
+            tipoA.classList.remove("flex");
+            tipoA.classList.add("hidden");
+            tipoBImg.classList.remove("hidden");
+            tipoBImg.classList.add("flex");
+            tipoAImg.classList.remove("flex");
+            tipoAImg.classList.add("hidden");
+            spanTipoA.classList.remove("bg-primary2");
+            spanTipoA.classList.add("border", "border-primary2");
+            spanTipoB.classList.remove("border", "border-primary2");
+            spanTipoB.classList.add("bg-primary2");
+           
+        });
+    }
+});
+
+</script>

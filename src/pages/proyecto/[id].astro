@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+import HeaderProjectsResponsive from '../../components/HeaderProjectsResponsive.astro';
+import HeaderProjects from '../../components/HeaderProjects.astro';
+import RendersProjects from '../../components/RendersProjects.astro';
+import GenesisAnimation from '../../components/GenesisAnimation.astro';
+import CombinedAnimations from '../../components/CombinedAnimations.astro';
+
+
+export function getStaticPaths() {
+  
+  return Array.from({ length: 12 }, (_, i) => ({
+    params: { id: (i + 1).toString() },
+  }));
+}
+
+const { id } = Astro.params;
+---
+
+<div class="h-full relative">
+  <a href="/proyectos" class=" fixed top-0 z-50 right-0 p-8 flex gap-4 text-white">
+    <span><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="white"  stroke="white"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M5 12l6 6" /><path d="M5 12l6 -6" /></svg></span>
+    Volver</a>
+  <CombinedAnimations idProject={id} />
+</div>
+
+
+
+  
+  
+  
+  
+  
+ 
