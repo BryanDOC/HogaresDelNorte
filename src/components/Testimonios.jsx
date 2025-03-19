@@ -44,7 +44,7 @@ export default function Testimonios() {
               key={card.id}
               className="p-4 bg-cover bg-center h-[500px] md:h-[700px] lg:h-[500px] xl:h-[600px] text-center rounded-lg shadow-lg flex items-end"
               style={{ 
-                backgroundImage: `url(/src/assets/${card.image}.webp)`, 
+                backgroundImage: `url(/assets/${card.image}.webp)`, 
                 width: isMobile ? "100%" : "32%"
               }}
               initial={{ opacity: 0, x: 50 }}

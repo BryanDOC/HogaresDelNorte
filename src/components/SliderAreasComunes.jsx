@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 
 const images = [
-  { src: "/src/assets/JardinInterior.webp", title: "Jardín Interior" },
-  { src: "/src/assets/Gym.jpg", title: "Piscina" },
-  { src: "/src/assets/Lobby.jpg", title: "Gimnasio" },
-  { src: "/src/assets/Piscina.jpeg", title: "Sala de Juegos" },
-  { src: "/src/assets/SalaDeEntretenimiento.jpg", title: "Terraza" },
-  { src: "/src/assets/SalaDeReuniones.jpg", title: "Lobby" },
-  { src: "/src/assets/Coworking.jpg", title: "Jardín Interior" }
+  { src: "/assets/JardinInterior.webp", title: "Jardín Interior" },
+  { src: "/assets/Gym.jpg", title: "Piscina" },
+  { src: "/assets/Lobby.jpg", title: "Gimnasio" },
+  { src: "/assets/Piscina.jpeg", title: "Sala de Juegos" },
+  { src: "/assets/SalaDeEntretenimiento.jpg", title: "Terraza" },
+  { src: "/assets/SalaDeReuniones.jpg", title: "Lobby" },
+  { src: "/assets/Coworking.jpg", title: "Jardín Interior" }
 ];
 
 export default function SliderAreasComunes() {
